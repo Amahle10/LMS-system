@@ -1,0 +1,19 @@
+.calendar-page {
+  padding: 20px;
+  color: #11101d;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.calendar-placeholder {
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 50px;
+  text-align: center;
+  color: #555;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}

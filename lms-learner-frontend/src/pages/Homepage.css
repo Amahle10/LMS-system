@@ -1,0 +1,128 @@
+.homepage {
+  padding: 20px;
+  color: #11101d;
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero {
+  background: #6c63ff;
+  color: white;
+  padding: 30px 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+
+.hero h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 16px;
+}
+
+/* Quick Access Cards */
+.quick-access {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.quick-access .card {
+  background: #11101d;
+  color: #fff;
+  flex: 1;
+  min-width: 140px;
+  height: 100px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.quick-access .card:hover {
+  transform: translateY(-5px);
+}
+
+.quick-access .icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+/* Recent Activity */
+.recent-activity {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.recent-activity h2 {
+  margin-bottom: 15px;
+}
+
+.recent-activity ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recent-activity li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Featured Courses */
+.featured-courses {
+  margin-bottom: 25px;
+}
+
+.featured-courses h2 {
+  margin-bottom: 15px;
+}
+
+.courses-grid {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.course-card {
+  flex: 1;
+  min-width: 160px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+}
+
+.course-card h3 {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.course-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .quick-access {
+    flex-direction: column;
+  }
+
+  .courses-grid {
+    flex-direction: column;
+  }
+}

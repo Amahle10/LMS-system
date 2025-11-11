@@ -1,0 +1,156 @@
+/* Sidebar base */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* hidden offscreen initially */
+  height: 100%;
+  width: 250px; /* expanded width */
+  background: #11101D;
+  padding: 10px 15px;
+  transition: left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  z-index: 300; /* higher than main content */
+  overflow: hidden;
+}
+
+.sidebar.open {
+  left: 0; /* slide in */
+}
+
+/* Sidebar header / logo */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  padding-left: 10px;
+  padding-top: 40px;
+}
+
+.sidebar-header .logo {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 10px;
+  white-space: nowrap;
+  opacity: 1;
+}
+
+/* Navigation list */
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.nav-list li {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.nav-list li a {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  color: #fff;
+  text-decoration: none;
+  padding: 0 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.nav-list li a:hover {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+/* Icon and label */
+.icon {
+  font-size: 22px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.label {
+  margin-left: 15px;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Profile / Footer */
+.sidebar-footer {
+  padding: 10px 15px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.profile-info .name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.profile-info .role {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* Always visible toggle button */
+.sidebar-toggle-button {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  background: #11101d;
+  color: #fff;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 400; /* above sidebar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-toggle-button:hover {
+  background: #1a1a2e;
+}
+
+/* Main content */
+.main-content {
+  padding: 25px;
+  transition: filter 0.3s ease;
+}
+
+.main-content.dimmed {
+  filter: brightness(0.7);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 220px;
+    left: -220px;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+}

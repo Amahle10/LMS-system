@@ -8,6 +8,8 @@ import Assignments from "./pages/Assignments";
 import Messages from "./pages/Messages";
 import Calendar from "./pages/Calendar";
 import Profile from "./pages/Profile";
+
+import Grades from "./pages/Grades";
 import "./App.css";
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
           <Route path="/messages" element={<Messages />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/grades" element={<Grades />} />
           </Routes>
       </div>
     </Router>

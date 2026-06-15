@@ -202,3 +202,17 @@
     left: 0;
   }
 }
+
+.profile-avatar.tiktok-style {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #F1F1F2; /* TikTok's standard light grey background */
+  border: 1px solid rgba(22, 24, 35, 0.12); /* Ultra-thin sleek boundary border */
+  padding: 4px; /* Creates internal breathing room for the avatar vector icon */
+  box-sizing: border-box;
+  flex-shrink: 0;
+  box-shadow: none; /* Removes heavy drop shadows for a flatter, modern application UI */
+}
+

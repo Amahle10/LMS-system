@@ -44,9 +44,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <li className="profile-container">
               <div className="profile-wrapper">
                 <img 
-                  src="https://placehold.co" 
+                  src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 24 24' fill='gray'><path d='M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z'/></svg>" 
                   alt="User Profile" 
-                  className="profile-avatar" 
+                  className="profile-avatar tiktok-style" 
                 />
                 {isOpen && (
                   <div className="profile-info">

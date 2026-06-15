@@ -17,14 +17,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (
     <>
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
-      {/* Header Logo */}
-      <div className="sidebar-header">
-        <div className="logo-container">
-          <i className="bx bx-layer logo-icon"></i> {/* Optional: Add a matching Boxicon for visual consistency when closed */}
-          <span className="logo-text">{isOpen && "LMS"}</span>
+        {/* Header Logo */}
+        <div className="sidebar-header">
+          <div className="logo-container">
+            <i className="bx bx-layer logo-icon"></i>
+            <span className="logo-text">{isOpen && "LMS"}</span>
+          </div>
         </div>
-      </div>
-
 
         {/* Main Navigation */}
         <ul className="nav-list">
@@ -43,8 +42,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <ul className="nav-list">
             <li className="profile-container">
               <div className="profile-wrapper">
+                {/* Fixed placeholder URL utilizing clean avatar silhouette api */}
                 <img 
-                  src="data:image/svg+xml;utf8,<svg xmlns='http://w3.org' viewBox='0 0 24 24' fill='gray'><path d='M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z'/></svg>" 
+                  src="https://ui-avatars.com" 
                   alt="User Profile" 
                   className="profile-avatar tiktok-style" 
                 />

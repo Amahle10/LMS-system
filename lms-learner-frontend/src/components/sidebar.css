@@ -125,15 +125,21 @@
   gap: 12px;
 }
 
+/* Default standard layout setup fallback rule */
 .profile-avatar {
   width: 42px;
   height: 42px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #ffffff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #f0f0f0;
   flex-shrink: 0; /* Prevents avatar from squeezing when sidebar closes */
+}
+
+/* Clean, modern TikTok/Instagram-inspired default avatar layout styling */
+.profile-avatar.tiktok-style {
+  background-color: #e5e7eb; /* Balanced, bright grey background palette */
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Sleek, crisp border boundary */
+  padding: 3px; /* Safe padding spacing for raw vector head elements */
+  box-sizing: border-box;
 }
 
 .profile-info {
@@ -202,17 +208,3 @@
     left: 0;
   }
 }
-
-.profile-avatar.tiktok-style {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  object-fit: cover;
-  background-color: #F1F1F2; /* TikTok's standard light grey background */
-  border: 1px solid rgba(22, 24, 35, 0.12); /* Ultra-thin sleek boundary border */
-  padding: 4px; /* Creates internal breathing room for the avatar vector icon */
-  box-sizing: border-box;
-  flex-shrink: 0;
-  box-shadow: none; /* Removes heavy drop shadows for a flatter, modern application UI */
-}
-

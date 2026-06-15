@@ -37,6 +37,32 @@
   opacity: 1;
 }
 
+.sidebar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  padding-left: 10px;
+  padding-top: 40px;
+}
+
+.profile-avatar {
+  /* Set explicit, identical dimensions for a perfect square */
+  width: 40px;
+  height: 40px;
+  
+  /* Makes the image a perfect circle */
+  border-radius: 50%;
+  
+  /* Prevents distortion if the image dimensions change */
+  object-fit: cover;
+  
+  /* Optional aesthetic touches */
+  border: 3px solid #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  background-color: #f0f0f0;
+}
+
 /* Navigation list */
 .nav-list {
   list-style: none;

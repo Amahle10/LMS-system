@@ -7,18 +7,12 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     <>
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
         {/* Sidebar header / logo */}
-        <div className="sidebar-header">
+        <div className="sidebar-header" style={{marginBottom: "50px"  }}>
           <div className="logo">{isOpen && "LMS"}</div>
         </div>
 
         {/* Navigation list */}
         <ul className="nav-list">
-          <li>
-            <Link to="/dashboard" onClick={toggleSidebar}>
-              <i className="bx bx-grid-alt icon"></i>
-              <span className="label">Dashboard</span>
-            </Link>
-          </li>
 
           <li>
             <Link to="/" onClick={toggleSidebar}>
@@ -26,6 +20,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               <span className="label">Homepage</span>
             </Link>
           </li>
+
+          <li>
+            <Link to="/dashboard" onClick={toggleSidebar}>
+              <i className="bx bx-grid-alt icon"></i>
+              <span className="label">Dashboard</span>
+            </Link>
+          </li>
+
 
           <li>
             <Link to="/courses" onClick={toggleSidebar}>
@@ -65,22 +67,34 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
         {/* Sidebar footer */}
         <div className="sidebar-footer">
-          <li>
-            <Link to="/settings" onClick={toggleSidebar}>
-              <i className="bx bx-cog icon"></i>
-              <span className="label">Settings</span>
-            </Link>
-          </li>
+          <ul className="nav-list">
 
-          <li className="profile">
-            <img src="https://via.placeholder.com/40" alt="profile" />
-            {isOpen && (
-              <div className="profile-info">
-                <div className="name">Kamva</div>
-                <div className="role">Learner</div>
+
+            {/* <li className="profile"> */}
+            <li> 
+              <div className='profile-image-and-username' style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
+
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                { < img src="https://placehold.co" alt="User Profile Picture" class="profile-avatar" />}
+
               </div>
-            )}
-          </li>
+              {isOpen && (
+                <div className="profile-info">
+                  <div className="name">Kamva</div>
+                  <div className="role">Learner</div>
+                </div>
+                )}
+              </div>
+            </li>
+
+
+            <li>
+              <Link to="/settings" onClick={toggleSidebar}>
+                <i className="bx bx-cog icon"></i>
+                <span className="label">Settings</span>
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
 

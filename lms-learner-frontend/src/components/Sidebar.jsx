@@ -3,90 +3,59 @@ import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
+  // Navigation links array for clean rendering
+  const menuItems = [
+    { to: "/", icon: "bx-home", label: "Homepage" },
+    { to: "/dashboard", icon: "bx-grid-alt", label: "Dashboard" },
+    { to: "/courses", icon: "bx-book-open", label: "My Courses" },
+    { to: "/assignments", icon: "bx-task", label: "Assignments" },
+    { to: "/grades", icon: "bx-bar-chart-alt-2", label: "Grades" },
+    { to: "/messages", icon: "bx-message-dots", label: "Messages" },
+    { to: "/calendar", icon: "bx-calendar", label: "Calendar" },
+  ];
+
   return (
     <>
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
-        {/* Sidebar header / logo */}
-        <div className="sidebar-header" style={{marginBottom: "50px"  }}>
-          <div className="logo">{isOpen && "LMS"}</div>
+      {/* Header Logo */}
+      <div className="sidebar-header">
+        <div className="logo-container">
+          <i className="bx bx-layer logo-icon"></i> {/* Optional: Add a matching Boxicon for visual consistency when closed */}
+          <span className="logo-text">{isOpen && "LMS"}</span>
         </div>
+      </div>
 
-        {/* Navigation list */}
+
+        {/* Main Navigation */}
         <ul className="nav-list">
-
-          <li>
-            <Link to="/" onClick={toggleSidebar}>
-              <i className="bx bx-home icon"></i>
-              <span className="label">Homepage</span>
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/dashboard" onClick={toggleSidebar}>
-              <i className="bx bx-grid-alt icon"></i>
-              <span className="label">Dashboard</span>
-            </Link>
-          </li>
-
-
-          <li>
-            <Link to="/courses" onClick={toggleSidebar}>
-              <i className="bx bx-book-open icon"></i>
-              <span className="label">My Courses</span>
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/assignments" onClick={toggleSidebar}>
-              <i className="bx bx-task icon"></i>
-              <span className="label">Assignments</span>
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/grades" onClick={toggleSidebar}>
-              <i className="bx bx-bar-chart-alt-2 icon"></i>
-              <span className="label">Grades</span>
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/messages" onClick={toggleSidebar}>
-              <i className="bx bx-message-dots icon"></i>
-              <span className="label">Messages</span>
-            </Link>
-          </li>
-
-          <li>
-            <Link to="/calendar" onClick={toggleSidebar}>
-              <i className="bx bx-calendar icon"></i>
-              <span className="label">Calendar</span>
-            </Link>
-          </li>
+          {menuItems.map((item) => (
+            <li key={item.to}>
+              <Link to={item.to} onClick={toggleSidebar}>
+                <i className={`bx ${item.icon} icon`}></i>
+                <span className="label">{item.label}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
 
-        {/* Sidebar footer */}
+        {/* Footer Profile & Settings */}
         <div className="sidebar-footer">
           <ul className="nav-list">
-
-
-            {/* <li className="profile"> */}
-            <li> 
-              <div className='profile-image-and-username' style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
-
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                { < img src="https://placehold.co" alt="User Profile Picture" class="profile-avatar" />}
-
-              </div>
-              {isOpen && (
-                <div className="profile-info">
-                  <div className="name">Kamva</div>
-                  <div className="role">Learner</div>
-                </div>
+            <li className="profile-container">
+              <div className="profile-wrapper">
+                <img 
+                  src="https://placehold.co" 
+                  alt="User Profile" 
+                  className="profile-avatar" 
+                />
+                {isOpen && (
+                  <div className="profile-info">
+                    <div className="name">Kamva</div>
+                    <div className="role">Learner</div>
+                  </div>
                 )}
               </div>
             </li>
-
 
             <li>
               <Link to="/settings" onClick={toggleSidebar}>
@@ -98,7 +67,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         </div>
       </div>
 
-      {/* Toggle button */}
+      {/* Mobile Toggle Button */}
       <button className="sidebar-toggle-button" onClick={toggleSidebar}>
         <i className="bx bx-menu"></i>
       </button>

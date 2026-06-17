@@ -4,19 +4,35 @@ import { useAuth } from "../hooks/useAuth";
 import "./Dashboard.css";
 
 const liveMessagesPool = [
-  { type: "info", text: "You have a class at 10:00 AM - Mathematics" },
-  { type: "update", text: "New assignment added: Algebra Worksheet" },
-  { type: "message", text: "Teacher: Great progress this week 👏" },
-  { type: "tip", text: "Tip: 10 minutes daily improves retention" },
+  {
+    type: "info",
+    title: "Upcoming Class",
+    text: "Mathematics starts at 10:00 AM",
+  },
+  {
+    type: "update",
+    title: "New Assignment",
+    text: "Algebra Worksheet has been added",
+  },
+  {
+    type: "message",
+    title: "Teacher Feedback",
+    text: "Great progress this week",
+  },
+  {
+    type: "tip",
+    title: "Study Tip",
+    text: "10 minutes daily improves retention",
+  },
 ];
 
 const Dashboard = () => {
   const { role, school, user } = useAuth();
-
   const safeRole = role || "student";
 
   const [feed, setFeed] = useState([liveMessagesPool[0]]);
   const [chat, setChat] = useState("");
+  const [time, setTime] = useState(new Date());
 
   const cardsByRole = {
     admin: [
@@ -43,7 +59,7 @@ const Dashboard = () => {
 
   const cards = cardsByRole[safeRole] || cardsByRole.student;
 
-  // 🔄 LIVE FEED LOOP (makes UI feel alive)
+  // LIVE FEED (stable updates)
   useEffect(() => {
     let index = 1;
 
@@ -52,14 +68,22 @@ const Dashboard = () => {
       index++;
 
       setFeed((prev) => [next, ...prev.slice(0, 4)]);
-    }, 3500);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, []);
 
+  // LIVE TIME ONLY
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   const sendChat = () => {
     if (!chat.trim()) return;
-    console.log("Quick chat:", chat);
     setChat("");
   };
 
@@ -78,20 +102,26 @@ const Dashboard = () => {
             : "Parent Home"}
         </h1>
 
-        <p>
-          <strong>Role:</strong> {safeRole} &nbsp;|&nbsp;
+        {/* SYSTEM STRIP (ONLY TIME + SCHOOL) */}
+        <div className="system-strip">
+          <div>{time.toLocaleTimeString()}</div>
+          <div>{school || "School System"}</div>
+        </div>
+
+        <p className="meta">
+          <strong>Role:</strong> {safeRole} |{" "}
           <strong>School:</strong> {school || "Loading..."}
         </p>
 
         <p>Welcome back, {user?.name || "Student User"}.</p>
       </div>
 
-      {/* QUICK CARDS */}
+      {/* CARDS */}
       <div className="cards-container">
         {cards.map((card, idx) => (
           <Link
-            to={card.link}
             key={idx}
+            to={card.link}
             className="dashboard-card"
             style={{ backgroundColor: card.color }}
           >
@@ -101,62 +131,71 @@ const Dashboard = () => {
         ))}
       </div>
 
-      {/* 🌤️ TODAY SECTION */}
+      {/* TODAY */}
       <section className="dashboard-today">
         <h2>Today at a glance</h2>
 
-        <p className="today-subtext">
-          Your learning flow is steady — here’s what’s active right now.
-        </p>
-
         <div className="today-grid">
-
           <div className="today-card blue">
-            <h3>📚 Learning Focus</h3>
+            <h3>Learning Focus</h3>
             <p>Mathematics & Science</p>
-            <span>Steady progress this week</span>
           </div>
 
           <div className="today-card pink">
-            <h3>📝 Assignments</h3>
+            <h3>Assignments</h3>
             <p>2 due soon</p>
-            <span>One already started</span>
           </div>
 
           <div className="today-card green">
-            <h3>🎯 Progress</h3>
+            <h3>Progress</h3>
             <p>76%</p>
-            <span>You're improving consistently</span>
           </div>
 
           <div className="today-card yellow">
-            <h3>💬 Messages</h3>
+            <h3>Messages</h3>
             <p>1 new update</p>
-            <span>From your teacher</span>
           </div>
-
         </div>
       </section>
 
-      {/* 🔥 LIVE FEED (NEW “ALIVE” LAYER) */}
+      {/* LIVE FEED (FIXED 4 SLOTS) */}
       <section className="live-feed">
         <h2>Live Updates</h2>
 
-        <div className="feed-container">
-          {feed.map((item, i) => (
-            <div key={i} className={`feed-card ${item.type}`}>
-              {item.text}
-            </div>
-          ))}
+        <div className="feed-container fixed-feed">
+
+          {Array.from({ length: 4 }).map((_, i) => {
+            const item = feed[i];
+
+            return (
+              <div
+                key={i}
+                className={`feed-card ${item?.type || "empty"}`}
+              >
+                <div className="feed-dot" />
+
+                <div>
+                  <div className="feed-title">
+                    {item?.title || "No update"}
+                  </div>
+
+                  <div className="feed-text">
+                    {item?.text || "Waiting for system activity..."}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+
         </div>
       </section>
 
-      {/* 💬 QUICK CHAT */}
+      {/* CHAT */}
       <div className="quick-chat">
         <input
           value={chat}
           onChange={(e) => setChat(e.target.value)}
-          placeholder="Ask something... (e.g. assignments, schedule)"
+          placeholder="Ask something..."
         />
         <button onClick={sendChat}>Send</button>
       </div>

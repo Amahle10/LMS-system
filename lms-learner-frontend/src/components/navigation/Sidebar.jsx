@@ -19,18 +19,6 @@ const Sidebar = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  const btn = {
-    width: "100%",
-    background: "#1f2937",
-    color: "#fff",
-    border: "none",
-    padding: "9px",
-    borderRadius: "7px",
-    cursor: "pointer",
-    marginBottom: "6px",
-    fontSize: "0.9rem",
-  };
-
   return (
     <aside
       style={{
@@ -41,49 +29,57 @@ const Sidebar = () => {
         padding: "14px",
         display: "flex",
         flexDirection: "column",
-        fontSize: "14px",
+        borderRight: "1px solid rgba(255,255,255,0.05)",
       }}
     >
-      {/* HEADER */}
+      {/* LOGO */}
       <Link
         to={isAuthenticated ? "/dashboard" : "/"}
         style={{
-          color: "#fff",
           textDecoration: "none",
+          color: "#fff",
           fontWeight: 800,
-          fontSize: "1.2rem",
+          fontSize: "1.15rem",
           marginBottom: "14px",
+          letterSpacing: "-0.02em",
         }}
       >
         EduSphere
       </Link>
 
-      {/* ROLE BLOCK */}
+      {/* SCHOOL INFO */}
       <div
         style={{
-          padding: "10px",
           background: "#111827",
           borderRadius: "10px",
-          borderLeft: `4px solid ${accent}`,
-          marginBottom: "12px",
+          padding: "12px",
+          borderLeft: `3px solid ${accent}`,
+          marginBottom: "14px",
         }}
       >
-        <div style={{ fontSize: "0.9rem", opacity: 0.8 }}>{role}</div>
-        <div style={{ fontSize: "1rem", fontWeight: 600 }}>
+        <div
+          style={{
+            fontSize: "11px",
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            opacity: 0.55,
+          }}
+        >
+          {role}
+        </div>
+
+        <div
+          style={{
+            marginTop: "4px",
+            fontSize: "15px",
+            fontWeight: 600,
+          }}
+        >
           {school || "Demo School"}
         </div>
       </div>
 
-      {/* DIVIDER */}
-      <div
-        style={{
-          height: "1px",
-          background: "rgba(255,255,255,0.06)",
-          margin: "6px 0 10px 0",
-        }}
-      />
-
-      {/* NAV */}
+      {/* NAVIGATION */}
       <nav>
         <ul
           style={{
@@ -104,25 +100,18 @@ const Sidebar = () => {
                   to={item.path}
                   style={{
                     display: "block",
-                    padding: "10px",
+                    padding: "10px 12px",
                     borderRadius: "8px",
                     textDecoration: "none",
                     color: "#fff",
-                    fontSize: "0.95rem",
+                    background: active
+                      ? "rgba(255,255,255,0.06)"
+                      : "transparent",
+                    borderLeft: active
+                      ? `2px solid ${accent}`
+                      : "2px solid transparent",
                     fontWeight: active ? 600 : 400,
-                    background: active ? "#1f2937" : "transparent",
-                    transform: active ? "translateX(2px)" : "none",
-                    transition: "all 0.15s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "#1f2937";
-                    e.currentTarget.style.transform = "translateX(3px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!active) {
-                      e.currentTarget.style.background = "transparent";
-                      e.currentTarget.style.transform = "translateX(0px)";
-                    }
+                    transition: "all .15s ease",
                   }}
                 >
                   {item.label}
@@ -133,137 +122,151 @@ const Sidebar = () => {
         </ul>
       </nav>
 
-      {/* 🧠 LIVE SCHOOL INFO PANEL */}
+      {/* STATIC LIVE STATUS PANEL */}
       <div
         style={{
           flex: 1,
-          marginTop: "12px",
-          marginBottom: "12px",
           display: "flex",
-          flexDirection: "column",
-          gap: "10px",
+          alignItems: "center",
+          marginTop: "18px",
+          marginBottom: "18px",
         }}
       >
-        {/* CURRENT STATUS */}
         <div
           style={{
+            width: "100%",
             background: "#111827",
-            borderRadius: "10px",
-            padding: "10px",
-            borderLeft: "3px solid #22c55e",
+            borderRadius: "12px",
+            border: "1px solid rgba(255,255,255,0.05)",
+            overflow: "hidden",
           }}
         >
-          <div style={{ fontSize: "0.75rem", opacity: 0.6 }}>
-            Current Status
+          <div
+            style={{
+              padding: "10px 12px",
+              borderBottom: "1px solid rgba(255,255,255,0.05)",
+              fontSize: "11px",
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
+              opacity: 0.55,
+            }}
+          >
+            Live Status
           </div>
 
-          <div style={{ fontSize: "0.9rem", fontWeight: 600 }}>
-            🟢 School in session
-          </div>
+          <StatusItem
+            label="Current Status"
+            value="School In Session"
+          />
 
-          <div style={{ fontSize: "0.8rem", opacity: 0.8 }}>
-            Next break in: <b>10 min</b>
-          </div>
-        </div>
+          <StatusItem
+            label="Next Event"
+            value="Break · 10 min"
+          />
 
-        {/* NEXT CLASS */}
-        <div
-          style={{
-            background: "#0b1220",
-            border: "1px solid rgba(255,255,255,0.06)",
-            borderRadius: "10px",
-            padding: "10px",
-          }}
-        >
-          <div style={{ fontSize: "0.75rem", opacity: 0.6 }}>
-            Next Class
-          </div>
+          <StatusItem
+            label="Next Class"
+            value="Mathematics · B12"
+          />
 
-          <div style={{ fontSize: "0.9rem", fontWeight: 600 }}>
-            📚 Mathematics (Room B12)
-          </div>
+          <StatusItem
+            label="Active Notice"
+            value="Physics moved to Lab 1"
+          />
 
-          <div style={{ fontSize: "0.8rem", opacity: 0.7 }}>
-            Starts in 12 min • Teacher: Mr. Dlamini
-          </div>
-        </div>
-
-        {/* ALERTS */}
-        <div
-          style={{
-            background: "#1a1111",
-            border: "1px solid rgba(239,68,68,0.25)",
-            borderRadius: "10px",
-            padding: "10px",
-          }}
-        >
-          <div style={{ fontSize: "0.75rem", opacity: 0.6 }}>
-            Alerts
-          </div>
-
-          <div style={{ fontSize: "0.85rem", color: "#fca5a5" }}>
-            ⚠️ Physics teacher absent
-          </div>
-
-          <div style={{ fontSize: "0.75rem", opacity: 0.7 }}>
-            Class moved to Lab 1 (self-study)
-          </div>
-        </div>
-
-        {/* NAVIGATION HELP */}
-        <div
-          style={{
-            background: "#111827",
-            borderRadius: "10px",
-            padding: "10px",
-          }}
-        >
-          <div style={{ fontSize: "0.75rem", opacity: 0.6 }}>
-            Navigation
-          </div>
-
-          <div style={{ fontSize: "0.85rem" }}>
-            📍 Current area: Block C
-          </div>
-
-          <div style={{ fontSize: "0.85rem" }}>
-            🧭 Next room: B12 (2 min walk)
-          </div>
+          <StatusItem
+            label="Last Update"
+            value="09:43"
+            last
+          />
         </div>
       </div>
 
       {/* FOOTER */}
       <div
         style={{
-          marginTop: "auto",
-          paddingTop: "10px",
-          borderTop: "1px solid rgba(255,255,255,0.08)",
+          borderTop: "1px solid rgba(255,255,255,0.06)",
+          paddingTop: "12px",
         }}
       >
         <div
           style={{
-            background: "#111827",
-            padding: "10px",
-            borderRadius: "8px",
-            marginBottom: "8px",
+            fontSize: "11px",
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            opacity: 0.55,
           }}
         >
-          <div style={{ fontSize: "0.85rem", opacity: 0.7 }}>
-            Signed in as
-          </div>
-          <div style={{ fontSize: "0.95rem", fontWeight: 600 }}>
-            {role || "visitor"}
-          </div>
+          Account
         </div>
 
-        <button style={btn}>Settings</button>
-        <button style={btn}>Help</button>
-        <button style={{ ...btn, background: "#ef4444" }}>
-          Logout
-        </button>
+        <div
+          style={{
+            marginTop: "4px",
+            fontWeight: 600,
+            fontSize: "14px",
+          }}
+        >
+          {role || "visitor"}
+        </div>
+
+        <div
+          style={{
+            marginTop: "10px",
+            display: "flex",
+            gap: "8px",
+          }}
+        >
+          <button style={footerBtn}>Settings</button>
+          <button style={footerBtn}>Help</button>
+        </div>
       </div>
     </aside>
   );
+};
+
+const StatusItem = ({ label, value, last = false }) => (
+  <div
+    style={{
+      padding: "11px 12px",
+      borderBottom: last
+        ? "none"
+        : "1px solid rgba(255,255,255,0.04)",
+    }}
+  >
+    <div
+      style={{
+        fontSize: "10px",
+        textTransform: "uppercase",
+        letterSpacing: "0.08em",
+        opacity: 0.5,
+        marginBottom: "3px",
+      }}
+    >
+      {label}
+    </div>
+
+    <div
+      style={{
+        fontSize: "13px",
+        fontWeight: 500,
+        lineHeight: 1.4,
+      }}
+    >
+      {value}
+    </div>
+  </div>
+);
+
+const footerBtn = {
+  flex: 1,
+  background: "#1f2937",
+  border: "none",
+  color: "#fff",
+  borderRadius: "8px",
+  padding: "8px",
+  cursor: "pointer",
+  fontSize: "12px",
 };
 
 export default Sidebar;

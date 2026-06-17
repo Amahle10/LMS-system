@@ -5,15 +5,32 @@ import Homepage from "./Homepage";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+
+  function validateUser(useremail){
+    if (useremail == 'amahle@gmail.com'){
+      return true;
+    }
+    else {
+      return false;
+    }
+  } 
 
   function validatePassword(password) {
     if (password == '12345678'){
-      navigate("/"); // Redirect to homepage on successful login
+      return true;
     }
     else {
-      alert("Invalid password. Please try again.");
       return false;
+    }
+    
+  }
+
+  function validateUserLogin(useremail, password) {
+    if (validateUser(useremail) && validatePassword(password)) {
+      navigate("/"); // Redirect to homepage on successful login
+    }else{
+      alert("Invalid email or password. Please try again.");
     }
   }
   return (
@@ -28,7 +45,7 @@ function Login() {
           <label>Password:</label>
           <input type="password" />
         </div>
-        <button type="submit" onClick={() => {validatePassword(document.querySelector('input[type="password"]').value);}}>Login</button>
+        <button type="submit" onClick={() => {validateUserLogin(document.querySelector('input[type="email"]').value, document.querySelector('input[type="password"]').value);}}>Login</button>
       </form>
     </div>
   );

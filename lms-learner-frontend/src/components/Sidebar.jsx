@@ -1,83 +1,53 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 import "./Sidebar.css";
 
-const Sidebar = ({ isOpen, toggleSidebar }) => {
-  // Navigation links array for clean rendering
+const Sidebar = () => {
+  const { role } = useAuth();
 
+  const safeRole = role || "student";
 
-  const menuItems = [
-    { to: "/", icon: "bx-home", label: "Homepage" },
-    { to: "/dashboard", icon: "bx-grid-alt", label: "Dashboard" },
-    { to: "/courses", icon: "bx-book-open", label: "My Courses" },
-    { to: "/assignments", icon: "bx-task", label: "Assignments" },
-    { to: "/grades", icon: "bx-bar-chart-alt-2", label: "Grades" },
-    { to: "/messages", icon: "bx-message-dots", label: "Messages" },
-    { to: "/calendar", icon: "bx-calendar", label: "Calendar" },
-  ];
+  const navByRole = {
+    admin: [
+      { label: "Overview", path: "/dashboard" },
+      { label: "Users", path: "/dashboard/users" },
+      { label: "Settings", path: "/dashboard/settings" },
+      { label: "Reports", path: "/dashboard/reports" },
+    ],
+    teacher: [
+      { label: "Today", path: "/dashboard" },
+      { label: "Classes", path: "/dashboard/classes" },
+      { label: "Assignments", path: "/dashboard/assignments" },
+      { label: "Grades", path: "/dashboard/grades" },
+    ],
+    student: [
+      { label: "Today", path: "/dashboard" },
+      { label: "Courses", path: "/dashboard/courses" },
+      { label: "Assignments", path: "/dashboard/assignments" },
+      { label: "Progress", path: "/dashboard/progress" },
+    ],
+    parent: [
+      { label: "Overview", path: "/dashboard" },
+      { label: "Children", path: "/dashboard/children" },
+      { label: "Messages", path: "/dashboard/messages" },
+    ],
+  };
+
+  const nav = navByRole[safeRole] || navByRole.student;
 
   return (
-    <>
-      <div className={`sidebar ${isOpen ? "open" : ""}`}>
-        {/* Header Logo */}
-        <div className="sidebar-header">
-          <div className="logo-container">
-            <i className="bx bx-layer logo-icon"></i>
-            <span className="logo-text">{isOpen && "LMS"}</span>
-          </div>
-        </div>
+    <div className="sidebar">
+      <h2 className="logo">LMS</h2>
 
-        {/* Main Navigation */}
-        <ul className="nav-list">
-          {menuItems.map((item) => (
-            <li key={item.to}>
-              <Link to={item.to} onClick={toggleSidebar}>
-                <i className={`bx ${item.icon} icon`}></i>
-                <span className="label">{item.label}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* Footer Profile & Settings */}
-        <div className="sidebar-footer">
-          <ul className="nav-list">
-            <li className="profile-container">
-              <div className="profile-wrapper">
-                <Link to="/profile" onClick={toggleSidebar}>
-                {/* <i className="bx bx-cog icon"></i> */}
-
-                  {/* Fixed placeholder URL utilizing clean avatar silhouette api */}
-                  <img 
-                    src="https://ui-avatars.com" 
-                    alt="User Profile" 
-                    className="profile-avatar tiktok-style" 
-                  />
-                {isOpen && (
-                  <div className="profile-info">
-                    <div className="name">Kamva</div>
-                    <div className="role">Learner</div>
-                  </div>
-                )}
-                </Link>
-              </div>
-            </li>
-
-            <li>
-              <Link to="/settings" onClick={toggleSidebar}>
-                <i className="bx bx-cog icon"></i>
-                <span className="label">Settings</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
+      <div className="nav">
+        {nav.map((item, idx) => (
+          <Link key={idx} to={item.path} className="nav-item">
+            {item.label}
+          </Link>
+        ))}
       </div>
-
-      {/* Mobile Toggle Button */}
-      <button className="sidebar-toggle-button" onClick={toggleSidebar}>
-        <i className="bx bx-menu"></i>
-      </button>
-    </>
+    </div>
   );
 };
 

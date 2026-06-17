@@ -1,3 +1,7 @@
+/* =========================
+   DASHBOARD BASE
+========================= */
+
 .dashboard {
   padding: 20px;
 }
@@ -9,7 +13,10 @@
   color: #11101d;
 }
 
-/* Cards container */
+/* =========================
+   CARDS (OVERVIEW)
+========================= */
+
 .cards-container {
   display: flex;
   gap: 20px;
@@ -17,7 +24,6 @@
   margin-bottom: 30px;
 }
 
-/* Individual card */
 .dashboard-card {
   flex: 1;
   min-width: 200px;
@@ -44,7 +50,10 @@
   font-weight: 500;
 }
 
-/* Dashboard content section */
+/* =========================
+   DASHBOARD CONTENT
+========================= */
+
 .dashboard-content {
   background: #fff;
   padding: 20px;
@@ -62,9 +71,168 @@
   color: #555;
 }
 
-/* Responsive adjustments */
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 768px) {
   .cards-container {
     flex-direction: column;
   }
+}
+
+/* =========================
+   TODAY SECTION (INFO LAYER)
+========================= */
+
+.dashboard-today {
+  margin-top: 30px;
+}
+
+.today-subtext {
+  color: #666;
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.today-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.today-card {
+  padding: 16px;
+  border-radius: 14px;
+  color: white;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.today-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+.today-card h3 {
+  font-size: 15px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.today-card p {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.today-card span {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+/* colors */
+.today-card.blue {
+  background: linear-gradient(135deg, #6C63FF, #5A54D1);
+}
+
+.today-card.pink {
+  background: linear-gradient(135deg, #FF6584, #E84E70);
+}
+
+.today-card.green {
+  background: linear-gradient(135deg, #1ABC9C, #14967C);
+}
+
+.today-card.yellow {
+  background: linear-gradient(135deg, #F9A826, #E39A1F);
+}
+
+/* =========================
+   LIVE FEED (ANIMATED)
+========================= */
+
+.live-feed {
+  margin-top: 30px;
+}
+
+.feed-container {
+  height: 140px;
+  overflow: hidden;
+  position: relative;
+}
+
+.feed-card {
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  color: white;
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.feed-card.info {
+  background: #6C63FF;
+}
+
+.feed-card.update {
+  background: #1ABC9C;
+}
+
+.feed-card.message {
+  background: #FF6584;
+}
+
+.feed-card.tip {
+  background: #F9A826;
+}
+
+/* =========================
+   QUICK CHAT (FLOATING)
+========================= */
+
+.quick-chat {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  background: white;
+  padding: 10px;
+  border-radius: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  width: 55%;
+  z-index: 999;
+}
+
+.quick-chat input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 8px;
+}
+
+.quick-chat button {
+  background: #6C63FF;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.dashboard {
+  padding: 20px;
+  padding-bottom: 100px; /* 👈 prevents overlap with chat bar */
 }

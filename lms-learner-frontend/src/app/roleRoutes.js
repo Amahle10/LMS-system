@@ -1,0 +1,42 @@
+export const roleMenus = {
+  visitor: [
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+    { label: "Programs", path: "/programs" },
+    { label: "Events", path: "/events" },
+    { label: "Contact", path: "/contact" },
+  ],
+  student: [
+    { label: "Home", path: "/dashboard" },
+    { label: "Courses", path: "/dashboard/courses" },
+    { label: "Assignments", path: "/dashboard/assignments" },
+    { label: "Grades", path: "/dashboard/grades" },
+    { label: "Calendar", path: "/dashboard/calendar" },
+    { label: "Messages", path: "/dashboard/messages" },
+    { label: "Profile", path: "/dashboard/profile" },
+  ],
+  teacher: [
+    { label: "Home", path: "/dashboard" },
+    { label: "Classes", path: "/dashboard/courses" },
+    { label: "Assignments", path: "/dashboard/assignments" },
+    { label: "Grades", path: "/dashboard/grades" },
+    { label: "Calendar", path: "/dashboard/calendar" },
+    { label: "Messages", path: "/dashboard/messages" },
+    { label: "Profile", path: "/dashboard/profile" },
+  ],
+  admin: [
+    { label: "Home", path: "/dashboard" },
+    { label: "Users", path: "/dashboard/users" },
+    { label: "Reports", path: "/dashboard/reports" },
+    { label: "Settings", path: "/dashboard/settings" },
+    { label: "Profile", path: "/dashboard/profile" },
+  ],
+  parent: [
+    { label: "Home", path: "/dashboard" },
+    { label: "Children", path: "/dashboard/courses" },
+    { label: "Grades", path: "/dashboard/grades" },
+    { label: "Calendar", path: "/dashboard/calendar" },
+    { label: "Messages", path: "/dashboard/messages" },
+    { label: "Profile", path: "/dashboard/profile" },
+  ],
+};

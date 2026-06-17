@@ -24,13 +24,11 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      {/* Hero Section */}
       <section className="hero">
         <h1>Welcome back, Kamva!</h1>
         <p>Here’s a quick overview of your learning activities.</p>
       </section>
 
-      {/* Quick Access Cards */}
       <section className="quick-access">
         {quickAccess.map((item, idx) => (
           <Link to={item.link} key={idx} className="card">
@@ -40,7 +38,6 @@ const Homepage = () => {
         ))}
       </section>
 
-      {/* Recent Activity */}
       <section className="recent-activity">
         <h2>Recent Activity</h2>
         <ul>
@@ -52,7 +49,6 @@ const Homepage = () => {
         </ul>
       </section>
 
-      {/* Featured Courses */}
       <section className="featured-courses">
         <h2>Featured Courses</h2>
         <div className="courses-grid">

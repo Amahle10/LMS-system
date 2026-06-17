@@ -1,39 +1,34 @@
-import React, { useState } from "react";
-import "./LoginPage.css";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import "./LoginPage.css";
 
 function Login() {
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { role, school, login } = useAuth();
 
-  function validateUser(useremail) {
-    return useremail === "amahle@gmail.com";
-  }
-
-  function validatePassword(password) {
-    return password === "12345678";
-  }
-
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (validateUser(email) && validatePassword(password)) {
-      localStorage.setItem("isLoggedIn", "true");
-      navigate("/");
-    } else {
-      alert("Invalid email or password.");
+    if (!email.trim() || !password.trim()) {
+      return;
     }
-  }
+
+    login(role, school);
+    navigate("/dashboard");
+  };
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
-
+      <h2>{role} Login</h2>
+      <p style={{ marginBottom: "1rem" }}>
+        School: <strong>{school}</strong>
+      </p>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email:</label>
+          <label>Email</label>
           <input
             type="email"
             value={email}
@@ -43,7 +38,7 @@ function Login() {
         </div>
 
         <div>
-          <label>Password:</label>
+          <label>Password</label>
           <input
             type="password"
             value={password}
@@ -52,9 +47,7 @@ function Login() {
           />
         </div>
 
-        <button type="submit">
-          Login
-        </button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );

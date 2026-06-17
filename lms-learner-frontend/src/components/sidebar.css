@@ -1,36 +1,48 @@
-/* =================================*********
+/* =========================================
    1. Sidebar Base Container
-   ========================================= */
+========================================= */
+
 .sidebar {
   position: fixed;
   top: 0;
-  left: -250px; /* Hidden offscreen initially */
+  left: -250px;
   height: 100%;
-  width: 250px; 
+  width: 250px;
   background: #11101D;
-  padding: 15px;
+
+  /* improved breathing room */
+  padding: 25px 15px 20px 15px;
+
   transition: left 0.3s ease;
+
   display: flex;
   flex-direction: column;
-  z-index: 300; 
-  overflow-y: auto;   /* Allows essential vertical scroll if viewport height shrinks */
-  overflow-x: hidden; /* Fixes and prevents unwanted bottom/horizontal scrolling */
+  justify-content: space-between; /* 👈 balances header / nav / footer */
+
+  z-index: 300;
+  overflow-y: auto;
+  overflow-x: hidden;
+
   box-sizing: border-box;
 }
 
 .sidebar.open {
-  left: 0; /* Slide view layout in */
+  left: 0;
 }
 
-/* =================================*********
+/* =========================================
    2. Sidebar Header Layout
-   ========================================= */
+========================================= */
+
 .sidebar-header {
   display: flex;
   align-items: center;
-  height: 50px;        /* Matches navigation item height */
-  margin-bottom: 40px; /* Space between logo and menu items */
-  padding: 0 15px;     /* Matches padding of navigation links */
+  height: 50px;
+
+  /* reduced harsh spacing */
+  margin-bottom: 25px;
+
+  padding: 0 15px;
 }
 
 .logo-container {
@@ -43,7 +55,7 @@
 .logo-icon {
   font-size: 24px;
   color: #ffffff;
-  min-width: 40px;     /* Matches navigation icon alignment */
+  min-width: 40px;
   display: flex;
   justify-content: center;
   margin-left: 10px;
@@ -53,42 +65,47 @@
   color: #ffffff;
   font-size: 18px;
   font-weight: 700;
-  margin-left: 20px;   /* Matches icon-to-label spacing */
+  margin-left: 20px;
   white-space: nowrap;
 }
 
-/* =================================*********
+/* =========================================
    3. Main Navigation
-   ========================================= */
+========================================= */
+
 .nav-list {
   list-style: none;
   padding: 0;
-  margin: 0;
-}
+  margin: 10px 0 0 0;
 
-/* Main content wrapper expands to push footer down */
-.sidebar > .nav-list {
-  flex: 1; 
+  flex: 1; /* 👈 allows nav to take available space */
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* 👈 smoother spacing than margin-bottom */
+  overflow-y: auto;
 }
 
 .nav-list li {
   width: 100%;
-  margin-bottom: 8px;
 }
 
 .nav-list li a {
   display: flex;
   align-items: center;
   height: 45px;
+
   color: #ffffff;
   text-decoration: none;
+
   padding: 0 15px;
   border-radius: 8px;
-  transition: background 0.2s ease, color 0.2s ease;
+
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .nav-list li a:hover {
   background: #1a1a2e;
+  transform: translateX(3px); /* 👈 subtle motion = premium feel */
 }
 
 .icon {
@@ -105,13 +122,15 @@
   white-space: nowrap;
 }
 
-/* =================================*********
+/* =========================================
    4. Sidebar Footer & Profile Section
-   ========================================= */
+========================================= */
+
 .sidebar-footer {
-  margin-top: auto; /* Pushes the footer block to screen bottom */
+  margin-top: auto;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider line */
+
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .profile-container {
@@ -125,20 +144,18 @@
   gap: 12px;
 }
 
-/* Default standard layout setup fallback rule */
 .profile-avatar {
   width: 42px;
   height: 42px;
   border-radius: 50%;
   object-fit: cover;
-  flex-shrink: 0; /* Prevents avatar from squeezing when sidebar closes */
+  flex-shrink: 0;
 }
 
-/* Clean, modern TikTok/Instagram-inspired default avatar layout styling */
 .profile-avatar.tiktok-style {
-  background-color: #e5e7eb; /* Balanced, bright grey background palette */
-  border: 1px solid rgba(255, 255, 255, 0.15); /* Sleek, crisp border boundary */
-  padding: 3px; /* Safe padding spacing for raw vector head elements */
+  background-color: #e5e7eb;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 3px;
   box-sizing: border-box;
 }
 
@@ -161,25 +178,33 @@
   white-space: nowrap;
 }
 
-/* =================================*********
-   5. Interface Control UI Elements
-   ========================================= */
+/* =========================================
+   5. Interface Controls
+========================================= */
+
 .sidebar-toggle-button {
   position: fixed;
   top: 20px;
   left: 0;
+
   width: 40px;
   height: 40px;
+
   background: #11101d;
   color: #ffffff;
+
   border: none;
   border-radius: 0 8px 8px 0;
+
   font-size: 22px;
   cursor: pointer;
-  z-index: 400; 
+
+  z-index: 400;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   transition: background 0.2s ease;
 }
 
@@ -196,14 +221,16 @@
   filter: brightness(0.7);
 }
 
-/* =================================*********
+/* =========================================
    6. Responsive Viewports
-   ========================================= */
+========================================= */
+
 @media (max-width: 768px) {
   .sidebar {
     width: 220px;
     left: -220px;
   }
+
   .sidebar.open {
     left: 0;
   }

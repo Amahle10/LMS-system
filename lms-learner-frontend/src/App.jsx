@@ -8,6 +8,7 @@ import Assignments from "./pages/Assignments";
 import Messages from "./pages/Messages";
 import Calendar from "./pages/Calendar";
 import Profile from "./pages/Profile";
+import Login from "./pages/LoginPage";
 
 import Grades from "./pages/Grades";
 import "./App.css";
@@ -22,6 +23,7 @@ function App() {
       <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
       <div className={`main-content ${isOpen ? "dimmed" : ""}`}>
         <Routes>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Homepage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/courses" element={<Courses />} />

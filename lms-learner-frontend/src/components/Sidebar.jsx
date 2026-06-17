@@ -42,18 +42,22 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <ul className="nav-list">
             <li className="profile-container">
               <div className="profile-wrapper">
-                {/* Fixed placeholder URL utilizing clean avatar silhouette api */}
-                <img 
-                  src="https://ui-avatars.com" 
-                  alt="User Profile" 
-                  className="profile-avatar tiktok-style" 
-                />
+                <Link to="/profile" onClick={toggleSidebar}>
+                {/* <i className="bx bx-cog icon"></i> */}
+
+                  {/* Fixed placeholder URL utilizing clean avatar silhouette api */}
+                  <img 
+                    src="https://ui-avatars.com" 
+                    alt="User Profile" 
+                    className="profile-avatar tiktok-style" 
+                  />
                 {isOpen && (
                   <div className="profile-info">
                     <div className="name">Kamva</div>
                     <div className="role">Learner</div>
                   </div>
                 )}
+                </Link>
               </div>
             </li>
 

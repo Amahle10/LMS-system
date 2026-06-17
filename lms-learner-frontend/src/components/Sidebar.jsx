@@ -4,6 +4,8 @@ import "./Sidebar.css";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   // Navigation links array for clean rendering
+
+
   const menuItems = [
     { to: "/", icon: "bx-home", label: "Homepage" },
     { to: "/dashboard", icon: "bx-grid-alt", label: "Dashboard" },

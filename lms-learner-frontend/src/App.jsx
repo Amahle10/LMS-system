@@ -1,6 +1,7 @@
-import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
+
+import Layout from "./pages/Layout";
+
 import Homepage from "./pages/Homepage";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
@@ -8,22 +9,19 @@ import Assignments from "./pages/Assignments";
 import Messages from "./pages/Messages";
 import Calendar from "./pages/Calendar";
 import Profile from "./pages/Profile";
+import Grades from "./pages/Grades";
 import Login from "./pages/LoginPage";
 
-import Grades from "./pages/Grades";
-import "./App.css";
-
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleSidebar = () => setIsOpen(!isOpen);
-
   return (
     <Router>
-      <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
-      <div className={`main-content ${isOpen ? "dimmed" : ""}`}>
-        <Routes>
-          <Route path="/login" element={<Login />} />
+      <Routes>
+
+        {/* Login page only */}
+        <Route path="/login" element={<Login />} />
+
+        {/* Pages with sidebar */}
+        <Route element={<Layout />}>
           <Route path="/" element={<Homepage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/courses" element={<Courses />} />
@@ -32,8 +30,9 @@ function App() {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/grades" element={<Grades />} />
-          </Routes>
-      </div>
+        </Route>
+
+      </Routes>
     </Router>
   );
 }

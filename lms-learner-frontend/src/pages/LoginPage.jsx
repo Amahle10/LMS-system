@@ -1,51 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LoginPage.css";
-import { Link, Route } from "react-router-dom";
-import Homepage from "./Homepage";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
 
-  function validateUser(useremail){
-    if (useremail == 'amahle@gmail.com'){
-      return true;
-    }
-    else {
-      return false;
-    }
-  } 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function validateUser(useremail) {
+    return useremail === "amahle@gmail.com";
+  }
 
   function validatePassword(password) {
-    if (password == '12345678'){
-      return true;
-    }
-    else {
-      return false;
-    }
-    
+    return password === "12345678";
   }
 
-  function validateUserLogin(useremail, password) {
-    if (validateUser(useremail) && validatePassword(password)) {
-      navigate("/"); // Redirect to homepage on successful login
-    }else{
-      alert("Invalid email or password. Please try again.");
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (validateUser(email) && validatePassword(password)) {
+      localStorage.setItem("isLoggedIn", "true");
+      navigate("/");
+    } else {
+      alert("Invalid email or password.");
     }
   }
+
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
-      <form>
+
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
-          <input type="email" />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
+
         <div>
           <label>Password:</label>
-          <input type="password" />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </div>
-        <button type="submit" onClick={() => {validateUserLogin(document.querySelector('input[type="email"]').value, document.querySelector('input[type="password"]').value);}}>Login</button>
+
+        <button type="submit">
+          Login
+        </button>
       </form>
     </div>
   );

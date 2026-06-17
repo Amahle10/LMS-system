@@ -32,6 +32,7 @@ const Dashboard = () => {
 
   const [feed, setFeed] = useState([liveMessagesPool[0]]);
   const [chat, setChat] = useState("");
+  const [search, setSearch] = useState("");
   const [time, setTime] = useState(new Date());
 
   const cardsByRole = {
@@ -59,26 +60,22 @@ const Dashboard = () => {
 
   const cards = cardsByRole[safeRole] || cardsByRole.student;
 
-  // LIVE FEED (stable updates)
+  // LIVE FEED
   useEffect(() => {
     let index = 1;
 
     const interval = setInterval(() => {
       const next = liveMessagesPool[index % liveMessagesPool.length];
       index++;
-
       setFeed((prev) => [next, ...prev.slice(0, 4)]);
     }, 7000);
 
     return () => clearInterval(interval);
   }, []);
 
-  // LIVE TIME ONLY
+  // LIVE CLOCK
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-
+    const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -92,17 +89,28 @@ const Dashboard = () => {
 
       {/* HEADER */}
       <div className="dashboard-header">
-        <h1>
-          {safeRole === "admin"
-            ? "Admin Home"
-            : safeRole === "teacher"
-            ? "Teacher Home"
-            : safeRole === "student"
-            ? "Student Home"
-            : "Parent Home"}
-        </h1>
 
-        {/* SYSTEM STRIP (ONLY TIME + SCHOOL) */}
+        {/* TOP BAR */}
+        <div className="header-top">
+          <h1>
+            {safeRole === "admin"
+              ? "Admin Home"
+              : safeRole === "teacher"
+              ? "Teacher Home"
+              : safeRole === "student"
+              ? "Student Home"
+              : "Parent Home"}
+          </h1>
+
+          <input
+            className="dashboard-search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search system..."
+          />
+        </div>
+
+        {/* SYSTEM STRIP */}
         <div className="system-strip">
           <div>{time.toLocaleTimeString()}</div>
           <div>{school || "School System"}</div>
@@ -158,27 +166,21 @@ const Dashboard = () => {
         </div>
       </section>
 
-      {/* LIVE FEED (FIXED 4 SLOTS) */}
+      {/* LIVE FEED */}
       <section className="live-feed">
         <h2>Live Updates</h2>
 
         <div className="feed-container fixed-feed">
-
           {Array.from({ length: 4 }).map((_, i) => {
             const item = feed[i];
 
             return (
-              <div
-                key={i}
-                className={`feed-card ${item?.type || "empty"}`}
-              >
+              <div key={i} className={`feed-card ${item?.type || "empty"}`}>
                 <div className="feed-dot" />
-
                 <div>
                   <div className="feed-title">
                     {item?.title || "No update"}
                   </div>
-
                   <div className="feed-text">
                     {item?.text || "Waiting for system activity..."}
                   </div>
@@ -186,7 +188,6 @@ const Dashboard = () => {
               </div>
             );
           })}
-
         </div>
       </section>
 

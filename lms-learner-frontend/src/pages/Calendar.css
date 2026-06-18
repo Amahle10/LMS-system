@@ -1,36 +1,176 @@
+:root {
+  --accent: #6C63FF;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --text: #111827;
+  --muted: #6b7280;
+}
 
-/* FULL DAY SLOT (important new concept) */
+/* =========================
+   PAGE
+========================= */
+.calendar-page {
+  padding: 20px;
+  background: var(--bg);
+  min-height: 100vh;
+  color: var(--text);
+}
+
+/* =========================
+   HEADER
+========================= */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.chip {
+  font-size: 12px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  color: var(--muted);
+}
+
+/* =========================
+   WEEK STRIP
+========================= */
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.week-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  padding: 10px;
+  text-align: center;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.week-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.week-card.active {
+  border-color: var(--accent);
+  background: #f5f3ff;
+}
+
+.day-name {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.day-date {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* =========================
+   DAY PANEL
+========================= */
+.day-panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  padding: 14px;
+}
+
+.section-title {
+  font-size: 14px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+/* =========================
+   TIMELINE
+========================= */
+.timeline-item {
+  display: grid;
+  grid-template-columns: 70px 10px 1fr;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px 8px;
+  border-radius: 10px;
+
+  transition: 0.2s ease;
+}
+
+.timeline-item:hover {
+  background: #f9fafb;
+}
+
+/* TIME */
+.time {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* DOT */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* TITLE */
+.title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* TYPE */
+.type {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: capitalize;
+}
+
+/* EMPTY SLOT */
 .empty-slot {
   font-size: 12px;
   color: #9ca3af;
   font-style: italic;
 }
 
-/* make timeline feel more "structured system" */
-.timeline-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 10px;
-  background: #f9fafb;
-  margin-bottom: 8px;
-  border: 1px solid #eef2f7;
-}
-
-/* subtle rhythm grid feel */
+/* =========================
+   SCROLL SAFETY (optional)
+========================= */
 .day-panel {
-  margin-top: 18px;
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
-
-/* stronger time column */
-.time {
-  width: 60px;
-  font-size: 11px;
-  color: #6b7280;
-  font-weight: 500;
+  max-height: 70vh;
+  overflow-y: auto;
 }

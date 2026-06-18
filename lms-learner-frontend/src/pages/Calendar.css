@@ -1,19 +1,149 @@
 .calendar-page {
   padding: 20px;
-  color: #11101d;
+  color: #111827;
+  font-family: system-ui;
+}
+
+/* HEADER */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .page-title {
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
 }
 
-.calendar-placeholder {
-  background: #f5f5f5;
+.subtitle {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.chip {
+  background: #111827;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+/* WEEK GRID */
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.week-card {
+  background: #f9fafb;
+  border: 1px solid #eef2f7;
   border-radius: 12px;
-  padding: 50px;
-  text-align: center;
-  color: #555;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.week-card:hover {
+  transform: translateY(-2px);
+}
+
+.week-card.active {
+  border: 2px solid #6c63ff;
+  background: white;
+}
+
+.day-name {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.day-date {
+  font-size: 11px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+/* MINI EVENTS */
+.mini-events {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mini-event {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #374151;
+}
+
+.mini-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.empty-mini {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+/* DAY PANEL */
+.day-panel {
+  margin-top: 20px;
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* TIMELINE */
+.timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #f9fafb;
+  margin-bottom: 8px;
+}
+
+.time {
+  width: 50px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.type {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+/* EMPTY */
+.empty-day {
+  padding: 12px;
+  font-size: 13px;
+  color: #6b7280;
 }

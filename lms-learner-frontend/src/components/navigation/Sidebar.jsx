@@ -3,7 +3,8 @@ import { useAuth } from "../../hooks/useAuth";
 import { roleMenus } from "../../app/roleRoutes";
 
 const Sidebar = () => {
-  const { role, school, isAuthenticated } = useAuth();
+  const { role, school, user, isAuthenticated } = useAuth();
+
   const menu = roleMenus[role] || roleMenus.visitor;
   const location = useLocation();
 
@@ -18,6 +19,46 @@ const Sidebar = () => {
   const accent = roleAccent[role] || "#94a3b8";
 
   const isActive = (path) => location.pathname === path;
+
+  // 🧭 DAY STRUCTURE PANEL (CORE UX)
+  const todayPanelByRole = {
+    student: [
+      { label: "Now", value: "Mathematics · B12" },
+      { label: "Next", value: "Break · 10:15 (23 min)" },
+      { label: "Lunch", value: "12:30" },
+      { label: "Home", value: "14:30" },
+    ],
+
+    teacher: [
+      { label: "Now", value: "Grade 10 Maths" },
+      { label: "Next", value: "Grade 11 Physics" },
+      { label: "Grading", value: "14 Pending" },
+      { label: "End", value: "15:00 Wrap-up" },
+    ],
+
+    parent: [
+      { label: "Now", value: "School Session Active" },
+      { label: "Next", value: "Break Time" },
+      { label: "Messages", value: "3 Unread" },
+      { label: "Event", value: "Parent Meeting" },
+    ],
+
+    admin: [
+      { label: "System", value: "Operational" },
+      { label: "Users", value: "128 Online" },
+      { label: "Reports", value: "18 Open" },
+      { label: "Status", value: "Stable" },
+    ],
+
+    visitor: [
+      { label: "Welcome", value: "Explore EduSphere" },
+      { label: "Schools", value: "Available" },
+      { label: "Learning", value: "Ready" },
+      { label: "Status", value: "Online" },
+    ],
+  };
+
+  const todayPanel = todayPanelByRole[role] || todayPanelByRole.student;
 
   return (
     <aside
@@ -122,7 +163,7 @@ const Sidebar = () => {
         </ul>
       </nav>
 
-      {/* STATIC LIVE STATUS PANEL */}
+      {/* 🧭 TODAY TIMELINE PANEL */}
       <div
         style={{
           flex: 1,
@@ -151,38 +192,21 @@ const Sidebar = () => {
               opacity: 0.55,
             }}
           >
-            Live Status
+            Today
           </div>
 
-          <StatusItem
-            label="Current Status"
-            value="School In Session"
-          />
-
-          <StatusItem
-            label="Next Event"
-            value="Break · 10 min"
-          />
-
-          <StatusItem
-            label="Next Class"
-            value="Mathematics · B12"
-          />
-
-          <StatusItem
-            label="Active Notice"
-            value="Physics moved to Lab 1"
-          />
-
-          <StatusItem
-            label="Last Update"
-            value="09:43"
-            last
-          />
+          {todayPanel.map((item, index) => (
+            <StatusItem
+              key={index}
+              label={item.label}
+              value={item.value}
+              last={index === todayPanel.length - 1}
+            />
+          ))}
         </div>
       </div>
 
-      {/* FOOTER */}
+      {/* USER PROFILE FOOTER */}
       <div
         style={{
           borderTop: "1px solid rgba(255,255,255,0.06)",
@@ -191,32 +215,56 @@ const Sidebar = () => {
       >
         <div
           style={{
-            fontSize: "11px",
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
-            opacity: 0.55,
-          }}
-        >
-          Account
-        </div>
-
-        <div
-          style={{
-            marginTop: "4px",
-            fontWeight: 600,
-            fontSize: "14px",
-          }}
-        >
-          {role || "visitor"}
-        </div>
-
-        <div
-          style={{
-            marginTop: "10px",
             display: "flex",
-            gap: "8px",
+            alignItems: "center",
+            gap: "10px",
+            marginBottom: "12px",
           }}
         >
+          <div
+            style={{
+              width: "42px",
+              height: "42px",
+              borderRadius: "50%",
+              background: accent,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontWeight: 700,
+              color: "#fff",
+              flexShrink: 0,
+              boxShadow: `0 0 0 3px ${accent}20`,
+            }}
+          >
+            {(user?.name || role || "U")[0].toUpperCase()}
+          </div>
+
+          <div style={{ overflow: "hidden" }}>
+            <div
+              style={{
+                fontWeight: 600,
+                fontSize: "14px",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {user?.name || "Student User"}
+            </div>
+
+            <div
+              style={{
+                fontSize: "11px",
+                opacity: 0.6,
+                textTransform: "capitalize",
+              }}
+            >
+              {role || "visitor"}
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", gap: "8px" }}>
           <button style={footerBtn}>Settings</button>
           <button style={footerBtn}>Help</button>
         </div>
@@ -225,6 +273,7 @@ const Sidebar = () => {
   );
 };
 
+/* 🧭 TIMELINE ITEM */
 const StatusItem = ({ label, value, last = false }) => (
   <div
     style={{
@@ -232,32 +281,48 @@ const StatusItem = ({ label, value, last = false }) => (
       borderBottom: last
         ? "none"
         : "1px solid rgba(255,255,255,0.04)",
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
     }}
   >
     <div
       style={{
-        fontSize: "10px",
-        textTransform: "uppercase",
-        letterSpacing: "0.08em",
-        opacity: 0.5,
-        marginBottom: "3px",
+        width: "7px",
+        height: "7px",
+        borderRadius: "50%",
+        background: "rgba(255,255,255,0.35)",
+        flexShrink: 0,
       }}
-    >
-      {label}
-    </div>
+    />
 
-    <div
-      style={{
-        fontSize: "13px",
-        fontWeight: 500,
-        lineHeight: 1.4,
-      }}
-    >
-      {value}
+    <div>
+      <div
+        style={{
+          fontSize: "10px",
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          opacity: 0.5,
+          marginBottom: "3px",
+        }}
+      >
+        {label}
+      </div>
+
+      <div
+        style={{
+          fontSize: "13px",
+          fontWeight: 500,
+          lineHeight: 1.4,
+        }}
+      >
+        {value}
+      </div>
     </div>
   </div>
 );
 
+/* BUTTON STYLE */
 const footerBtn = {
   flex: 1,
   background: "#1f2937",

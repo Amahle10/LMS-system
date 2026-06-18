@@ -1,813 +1,332 @@
-/* =========================
-   DASHBOARD BASE
-========================= */
-
-.dashboard {
-  padding: 20px;
-}
-
-.dashboard-title {
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #11101d;
-}
-
-/* =========================
-   CARDS (OVERVIEW)
-========================= */
-
-.cards-container {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-}
-
-.dashboard-card {
-  flex: 1;
-  min-width: 200px;
-  padding: 20px;
-  border-radius: 12px;
-  color: #fff;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.dashboard-card:hover {
-  transform: translateY(-5px);
-}
-
-.dashboard-card h2 {
-  font-size: 36px;
-  margin-bottom: 10px;
-}
-
-.dashboard-card p {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-/* =========================
-   DASHBOARD CONTENT
-========================= */
-
-.dashboard-content {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-}
-
-.dashboard-content h2 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-.dashboard-content p {
-  font-size: 16px;
-  color: #555;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 768px) {
-  .cards-container {
-    flex-direction: column;
-  }
-}
-
-/* =========================
-   TODAY SECTION (INFO LAYER)
-========================= */
-
-.dashboard-today {
-  margin-top: 30px;
-}
-
-.today-subtext {
-  color: #666;
-  font-size: 15px;
-  margin-bottom: 15px;
-}
-
-.today-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-}
-
-.today-card {
-  padding: 16px;
-  border-radius: 14px;
-  color: white;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.today-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
-}
-
-.today-card h3 {
-  font-size: 15px;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
-.today-card p {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.today-card span {
-  font-size: 13px;
-  opacity: 0.9;
-}
-
-/* colors */
-.today-card.blue {
-  background: linear-gradient(135deg, #6C63FF, #5A54D1);
-}
-
-.today-card.pink {
-  background: linear-gradient(135deg, #FF6584, #E84E70);
-}
-
-.today-card.green {
-  background: linear-gradient(135deg, #1ABC9C, #14967C);
-}
-
-.today-card.yellow {
-  background: linear-gradient(135deg, #F9A826, #E39A1F);
-}
-
-/* =========================
-   LIVE FEED (ANIMATED)
-========================= */
-
-.live-feed {
-  margin-top: 30px;
-}
-
-.feed-container {
-  height: 140px;
-  overflow: hidden;
-  position: relative;
-}
-
-.feed-card {
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  color: white;
-  animation: slideIn 0.5s ease;
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateY(15px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.feed-card.info {
-  background: #6C63FF;
-}
-
-.feed-card.update {
-  background: #1ABC9C;
-}
-
-.feed-card.message {
-  background: #FF6584;
-}
-
-.feed-card.tip {
-  background: #F9A826;
-}
-
-/* =========================
-   QUICK CHAT (FLOATING)
-========================= */
-
-.quick-chat {
-  position: fixed;
-  bottom: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  background: white;
-  padding: 10px;
-  border-radius: 30px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  width: 55%;
-  z-index: 999;
-}
-
-.quick-chat input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 8px;
-}
-
-.quick-chat button {
-  background: #6C63FF;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.dashboard {
-  padding: 20px;
-  padding-bottom: 100px;
-}
-
-.quick-chat {
-  height: 60px;
-}
-
 :root {
-  --chat-height: 70px;
+  --accent: #6C63FF;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --text: #111827;
+  --muted: #6b7280;
 }
 
+/* BASE */
 .dashboard {
-  padding-bottom: calc(var(--chat-height) + 30px);
+  padding: 20px;
+  background: var(--bg);
+  min-height: 100vh;
 }
 
-.quick-chat {
-  height: var(--chat-height);
-}
-
-/* =========================
-   FEED FIXED STYLES
-========================= */
-
-.feed-container {
-  height: auto;
-  max-height: 220px;
-  overflow-y: auto;
-  padding-right: 5px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* base card */
-.feed-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 10px;
-  background: #111827;
-  transform: translateY(-6px);
-  opacity: 0;
-  animation: slideIn 0.35s ease forwards;
-}
-
-/* dot */
-.feed-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  margin-top: 4px;
-}
-
-/* types */
-.feed-card.info .feed-dot { background: #3b82f6; }
-.feed-card.update .feed-dot { background: #22c55e; }
-.feed-card.message .feed-dot { background: #f59e0b; }
-.feed-card.tip .feed-dot { background: #a855f7; }
-
-.feed-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: white;
-}
-
-.feed-text {
-  font-size: 12px;
-  opacity: 0.7;
-}
-
-/* =========================
-   ✅ ADDED STYLING (NEW ONLY)
-   System strip + meta polish
-========================= */
-
-.system-strip {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 14px;
-  margin-top: 10px;
-  border-radius: 12px;
-
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(10px);
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  color: #e5e7eb;
-  font-size: 13px;
-
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-}
-
-.system-strip div {
-  opacity: 0.9;
-}
-
-.system-strip div:nth-child(2) {
-  font-weight: 600;
-  opacity: 1;
-}
-
-.meta {
-  margin-top: 10px;
-  padding: 10px 12px;
-  border-radius: 10px;
-
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-
-  font-size: 13px;
-  color: #374151;
-
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
-}
-
-.meta strong {
-  color: #111827;
-}
-
-/* =========================
-   🔍 SEARCH BAR (TOP RIGHT ADD-ON)
-========================= */
-
+/* HEADER */
 .dashboard-header {
-  position: relative;
-}
-
-/* container wrapper for header actions */
-.dashboard-actions {
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* search input */
-.dashboard-search {
-  width: 220px;
-  padding: 8px 12px;
-
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(10px);
-
-  font-size: 13px;
-  color: #111827;
-
-  outline: none;
-
-  transition: all 0.2s ease;
-}
-
-/* focus state */
-.dashboard-search:focus {
-  width: 260px;
-  border-color: rgba(108, 99, 255, 0.5);
-  box-shadow: 0 6px 18px rgba(108, 99, 255, 0.15);
-}
-
-/* search icon (optional if you add one later) */
-.dashboard-search::placeholder {
-  color: #6b7280;
-  font-size: 12px;
-}
-
-/* =========================
-   ✨ SUBTLE "SMART SYSTEM" FEEL (NO COLOR CHANGES)
-========================= */
-
-/* slight polish to header text */
-.dashboard-header h1 {
-  letter-spacing: -0.5px;
-}
-
-/* make system strip feel more "data panel" */
-.system-strip {
-  position: relative;
-  overflow: hidden;
-}
-
-.system-strip::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -50%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.08),
-    transparent
-  );
-  animation: systemScan 6s linear infinite;
-}
-
-@keyframes systemScan {
-  0% {
-    left: -50%;
-  }
-  100% {
-    left: 120%;
-  }
-}
-
-/* feed title subtle system feel */
-.feed-title {
-  letter-spacing: 0.2px;
-}
-
-/* card hover refinement (no color change, just feel) */
-.dashboard-card {
-  transform-origin: center;
-}
-
-.dashboard-card:hover {
-  transform: translateY(-5px) scale(1.01);
-}
-
-/* =========================
-   SEARCH + HEADER LAYOUT (ONLY ADDITION)
-========================= */
-
-.dashboard-header {
-  position: relative;
+  margin-bottom: 20px;
 }
 
 .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 15px;
 }
 
+.dashboard-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* SEARCH */
 .dashboard-search {
   width: 220px;
-  padding: 8px 12px;
-
+  padding: 8px 10px;
+  border: 1px solid var(--border);
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(10px);
-
-  font-size: 13px;
   outline: none;
-
-  transition: 0.2s ease;
+  font-size: 13px;
 }
 
 .dashboard-search:focus {
-  width: 260px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent);
 }
 
-.dashboard-search::placeholder {
-  color: #6b7280;
-}
-
-/* =========================
-   QUICK CHAT (REFINED / SMALLER)
-========================= */
-
-.quick-chat {
-  position: fixed;
-  bottom: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
+/* SYSTEM STRIP */
+.system-strip {
+  margin-top: 10px;
+  padding: 10px 14px;
   background: white;
-  padding: 6px 10px; /* reduced */
-  border-radius: 18px; /* slightly sharper, more system feel */
-
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-
-  width: min(520px, 80%); /* smaller + responsive */
-  height: 44px; /* 👈 key fix */
-
-  z-index: 999;
-}
-
-/* input becomes compact + clean */
-.quick-chat input {
-  flex: 1;
-  border: none;
-  outline: none;
-
-  padding: 6px 8px;
-  font-size: 13px;
-
-  background: transparent;
-}
-
-/* button becomes minimal */
-.quick-chat button {
-  background: #6C63FF;
-  color: white;
-
-  border: none;
-  padding: 6px 12px;
-
+  border: 1px solid var(--border);
   border-radius: 12px;
-  font-size: 12px;
-
-  cursor: pointer;
-}
-
-/* optional micro-interaction */
-.quick-chat button:hover {
-  transform: translateY(-1px);
-}
-
-/* =========================
-   QUICK CHAT (ULTRA COMPACT)
-========================= */
-
-.quick-chat {
-  position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
 
   display: flex;
-  align-items: center;
-  gap: 6px;
-
-  background: white;
-
-  padding: 4px 8px;
-  border-radius: 14px;
-
-  box-shadow: 0 6px 14px rgba(0,0,0,0.10);
-
-  width: min(420px, 85%);
-  height: 38px;
-
-  z-index: 999;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
 }
 
-/* input */
-.quick-chat input {
-  flex: 1;
-  border: none;
-  outline: none;
-
-  padding: 4px 6px;
-  font-size: 12px;
-
-  background: transparent;
+/* META */
+.meta {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
 }
 
-/* button */
-.quick-chat button {
-  background: #6C63FF;
-  color: white;
-
-  border: none;
-  padding: 4px 10px;
-
-  border-radius: 10px;
-  font-size: 11px;
-
-  cursor: pointer;
+.welcome {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--text);
 }
 
-/* subtle interaction */
-.quick-chat button:active {
-  transform: scale(0.97);
-}
-
-.quick-chat {
-  position: fixed;
-  bottom: 16px;
-
-  /* ✅ FIX: slight right shift but NOT full right alignment */
-
-  /* it should be at the center*/
-  right: 24px;
-  left: 60%;
-  transform: none;
-
+/* CARDS */
+.cards-container {
   display: flex;
-  align-items: center;
-  gap: 6px;
-
-  background: white;
-
-  padding: 4px 8px;
-  border-radius: 14px;
-
-  box-shadow: 0 6px 14px rgba(0,0,0,0.10);
-
-  width: min(380px, 85%);
-  height: 38px;
-
-  z-index: 999;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 .dashboard-card {
   flex: 1;
   min-width: 200px;
-  padding: 18px 18px;
-
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 14px;
-  color: #fff;
 
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  padding: 16px;
 
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-
-  cursor: pointer;
-
-  /* 👇 system feel upgrade */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 6px;
 
+  text-decoration: none;
+  color: var(--text);
+
+  transition: 0.2s ease;
   position: relative;
-  overflow: hidden;
 }
 
-/* subtle “data scan” line (like system UI) */
-.dashboard-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 0%,
-    rgba(255,255,255,0.08) 40%,
-    transparent 70%
-  );
-  transform: translateX(-100%);
-  transition: transform 0.6s ease;
-}
-
-.dashboard-card:hover::after {
-  transform: translateX(100%);
+.dashboard-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
 }
 
 .dashboard-card h2 {
-  font-size: 34px;
-  font-weight: 700;
+  font-size: 28px;
   margin: 0;
-  letter-spacing: -0.5px;
 }
 
 .dashboard-card p {
-  font-size: 14px;
-  font-weight: 500;
-  opacity: 0.9;
-  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
 }
 
-/* 👇 NEW: subtle system label feel */
-.dashboard-card::before {
-  content: "SYSTEM METRIC";
-  font-size: 10px;
-  letter-spacing: 1px;
-  opacity: 0.6;
-
-  position: absolute;
-  top: 10px;
-  right: 12px;
-}
-
-
-.dashboard-card {
-  position: relative; /* IMPORTANT */
-}
-
-/* TOP RIGHT INFO BUTTON */
+/* INFO BUTTON */
 .info-btn {
   position: absolute;
   bottom: 10px;
   right: 10px;
 
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  border: none;
+  border: 1px solid var(--border);
 
-  background: rgba(255, 255, 255, 0.25);
-  color: white;
-
-  font-size: 12px;
-  font-weight: bold;
-
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: 0.2s ease;
-}
-
-.info-btn:hover {
-  background: rgba(255, 255, 255, 0.45);
-  transform: scale(1.05);
-}
-
-.dashboard-card,
-.today-card {
-  position: relative;
-}
-
-.info-btn {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-
-  width: 15px;
-  height: 15px;
-
-  border-radius: 50%;
-  border: none;
-
-  background: rgba(255, 255, 255, 0.25);
-  color: white;
+  background: white;
+  color: var(--muted);
 
   font-size: 11px;
-  font-weight: bold;
-
   cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: 0.2s ease;
 }
 
-.info-btn:hover {
-  background: rgba(255, 255, 255, 0.45);
-  transform: scale(1.05);
+/* TODAY */
+.today-section {
+  margin-top: 30px;
+}
+
+.today-section h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.today-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.today-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  padding: 14px;
+}
+
+.today-card h3 {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.today-card p {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* FEED */
+.live-feed {
+  margin-top: 30px;
+}
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.feed-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  padding: 10px;
+
+  display: flex;
+  gap: 10px;
+}
+
+.feed-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 5px;
+  background: var(--accent);
+}
+
+.feed-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.feed-text {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* CHAT */
+.quick-chat {
+  position: fixed;
+  bottom: 16px;
+  left: 70%;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 8px;
+
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  padding: 6px;
+  width: min(420px, 90%);
+}
+
+.quick-chat input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 13px;
+}
+
+.quick-chat button {
+  background: var(--accent);
+  color: white;
+
+  border: none;
+  padding: 6px 12px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .dashboard {
-  position: relative;
   padding: 20px;
-  padding-bottom: 100px;
+  background: var(--bg);
+  min-height: 100vh;
 
-  /* base background */
-  background: #f8fafc;
+  position: relative;
   overflow: hidden;
 }
 
+/* GRID LAYER */
 .dashboard::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
 
   background-image:
-    /* vertical lines */
-    linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(to right, rgba(17, 24, 39, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 24, 39, 0.04) 1px, transparent 1px);
 
-    /* horizontal lines */
-    linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
 
-  background-size: 80px 80px;
+  opacity: 0.6;
+}
+
+.dashboard-card h2 {
+  font-size: 28px;
+  margin: 0;
+  display: inline-block;
+  position: relative;
+}
+
+.dashboard {
+  padding: 20px;
+  background: var(--bg);
+  min-height: 100vh;
+
+  position: relative;
+  overflow: hidden;
+
+  /* isolate stacking context */
+  isolation: isolate;
+}
+.dashboard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(to right, rgba(17, 24, 39, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 24, 39, 0.04) 1px, transparent 1px);
+
+  background-size: 60px 60px;
+
+  opacity: 0.5;
+
+  /* KEY FIX */
+  z-index: 0;
+}
+
+.dashboard > * {
+  position: relative;
+  z-index: 1;
+}
+
+.quick-chat {
+  position: fixed;
+  bottom: 20px;
+  left: 76%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 8px;
+
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  padding: 6px;
+
+  width: min(420px, 90%);
+
+  transition: all 0.3s ease;
 }

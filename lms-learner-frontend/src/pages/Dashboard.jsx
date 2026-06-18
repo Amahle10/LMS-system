@@ -21,99 +21,24 @@ const Dashboard = () => {
 
   const cardsByRole = {
     admin: [
-      {
-        title: "Users",
-        count: 128,
-        color: "#6C63FF",
-        link: "/dashboard/users",
-        description: "Manage all system users, roles, and permissions.",
-      },
-      {
-        title: "Reports",
-        count: 18,
-        color: "#FF6584",
-        link: "/dashboard/reports",
-        description: "View system analytics and performance reports.",
-      },
-      {
-        title: "Settings",
-        count: 3,
-        color: "#1ABC9C",
-        link: "/dashboard/settings",
-        description: "Configure system settings and preferences.",
-      },
+      { title: "Users", count: 128, link: "/dashboard/users", description: "Manage system users." },
+      { title: "Reports", count: 18, link: "/dashboard/reports", description: "Analytics reports." },
+      { title: "Settings", count: 3, link: "/dashboard/settings", description: "System settings." },
     ],
-
     teacher: [
-      {
-        title: "Classes",
-        count: 6,
-        color: "#6C63FF",
-        link: "/dashboard/courses",
-        description: "Manage your active classes and schedules.",
-      },
-      {
-        title: "Assignments",
-        count: 14,
-        color: "#FF6584",
-        link: "/dashboard/assignments",
-        description: "Create and review student assignments.",
-      },
-      {
-        title: "Grades",
-        count: "87%",
-        color: "#1ABC9C",
-        link: "/dashboard/grades",
-        description: "Track student performance and grading.",
-      },
+      { title: "Classes", count: 6, link: "/dashboard/courses", description: "Your classes." },
+      { title: "Assignments", count: 14, link: "/dashboard/assignments", description: "Assignments." },
+      { title: "Grades", count: "87%", link: "/dashboard/grades", description: "Student grading." },
     ],
-
     student: [
-      {
-        title: "Courses",
-        count: 5,
-        color: "#6C63FF",
-        link: "/dashboard/courses",
-        description: "Access your enrolled learning courses.",
-      },
-      {
-        title: "Assignments",
-        count: 8,
-        color: "#FF6584",
-        link: "/dashboard/assignments",
-        description: "View and submit your assignments.",
-      },
-      {
-        title: "Grades",
-        count: "76%",
-        color: "#1ABC9C",
-        link: "/dashboard/grades",
-        description: "Check your academic progress.",
-      },
+      { title: "Courses", count: 5, link: "/dashboard/courses", description: "Your courses." },
+      { title: "Assignments", count: 8, link: "/dashboard/assignments", description: "Your tasks." },
+      { title: "Grades", count: "76%", link: "/dashboard/grades", description: "Your progress." },
     ],
-
     parent: [
-      {
-        title: "Children",
-        count: 2,
-        color: "#6C63FF",
-        link: "/dashboard/courses",
-        description: "Monitor your children’s academic activity.",
-      },
-      {
-        title: "Attendance",
-        count: "96%",
-        color: "#FF6584",
-        link: "/dashboard/calendar",
-        description: "Track attendance records.",
-      },
-      {
-        title: "Messages",
-        count: 5,
-        color: "#1ABC9C",
-        link: "/dashboard/messages",
-        description: "View school communication.",
-      },
+      { title: "Children", count: 2, link: "/dashboard/courses", description: "Monitor children." },
+      { title: "Attendance", count: "96%", link: "/dashboard/calendar", description: "Attendance tracking." },
+      { title: "Messages", count: 5, link: "/dashboard/messages", description: "School messages." },
     ],
   };
 
@@ -125,7 +50,7 @@ const Dashboard = () => {
       const next = liveMessagesPool[index % liveMessagesPool.length];
       index++;
       setFeed((prev) => [next, ...prev.slice(0, 4)]);
-    }, 7000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, []);
@@ -135,15 +60,15 @@ const Dashboard = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const sendChat = () => {
-    if (!chat.trim()) return;
-    setChat("");
-  };
-
   const showInfo = (e, text) => {
     e.preventDefault();
     e.stopPropagation();
-    window.alert(text || "No description available.");
+    alert(text);
+  };
+
+  const sendChat = () => {
+    if (!chat.trim()) return;
+    setChat("");
   };
 
   return (
@@ -151,15 +76,10 @@ const Dashboard = () => {
 
       {/* HEADER */}
       <div className="dashboard-header">
+
         <div className="header-top">
           <h1>
-            {safeRole === "admin"
-              ? "Admin Home"
-              : safeRole === "teacher"
-              ? "Teacher Home"
-              : safeRole === "student"
-              ? "Student Home"
-              : "Parent Home"}
+            {safeRole.charAt(0).toUpperCase() + safeRole.slice(1)} Dashboard
           </h1>
 
           <input
@@ -176,22 +96,17 @@ const Dashboard = () => {
         </div>
 
         <p className="meta">
-          <strong>Role:</strong> {safeRole} |{" "}
-          <strong>School:</strong> {school || "Loading..."}
+          Role: {safeRole} • School: {school || "Loading..."}
         </p>
 
-        <p>Welcome back, {user?.name || "Student User"}.</p>
+        <p className="welcome">Welcome back, {user?.name || "User"}.</p>
       </div>
 
       {/* CARDS */}
       <div className="cards-container">
         {cards.map((card, idx) => (
-          <Link
-            key={idx}
-            to={card.link}
-            className="dashboard-card"
-            style={{ backgroundColor: card.color }}
-          >
+          <Link key={idx} to={card.link} className="dashboard-card">
+
             <h2>{card.count}</h2>
             <p>{card.title}</p>
 
@@ -201,62 +116,35 @@ const Dashboard = () => {
             >
               i
             </button>
+
           </Link>
         ))}
       </div>
 
       {/* TODAY */}
-      <section className="dashboard-today">
+      <section className="today-section">
         <h2>Today at a glance</h2>
 
         <div className="today-grid">
 
-          <div className="today-card blue">
+          <div className="today-card">
             <h3>Learning Focus</h3>
             <p>Mathematics & Science</p>
-            <button className="info-btn"
-              onClick={(e) =>
-                showInfo(e, "Your current learning focus areas based on curriculum plan.")
-              }
-            >
-              i
-            </button>
           </div>
 
-          <div className="today-card pink">
+          <div className="today-card">
             <h3>Assignments</h3>
             <p>2 due soon</p>
-            <button className="info-btn"
-              onClick={(e) =>
-                showInfo(e, "Assignments due soon that need attention.")
-              }
-            >
-              i
-            </button>
           </div>
 
-          <div className="today-card green">
+          <div className="today-card">
             <h3>Progress</h3>
             <p>76%</p>
-            <button className="info-btn"
-              onClick={(e) =>
-                showInfo(e, "Your academic performance overview.")
-              }
-            >
-              i
-            </button>
           </div>
 
-          <div className="today-card yellow">
+          <div className="today-card">
             <h3>Messages</h3>
             <p>1 new update</p>
-            <button className="info-btn"
-              onClick={(e) =>
-                showInfo(e, "Latest school messages and notifications.")
-              }
-            >
-              i
-            </button>
           </div>
 
         </div>
@@ -274,12 +162,8 @@ const Dashboard = () => {
               <div key={i} className={`feed-card ${item?.type || "empty"}`}>
                 <div className="feed-dot" />
                 <div>
-                  <div className="feed-title">
-                    {item?.title || "No update"}
-                  </div>
-                  <div className="feed-text">
-                    {item?.text || "Waiting for system activity..."}
-                  </div>
+                  <div className="feed-title">{item?.title || "No update"}</div>
+                  <div className="feed-text">{item?.text || "Waiting..."}</div>
                 </div>
               </div>
             );
